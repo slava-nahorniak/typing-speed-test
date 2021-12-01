@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "react-redux_typing-speed-test",
+  "name": "typing-speed-test",
   "author": "Viacheslav Nahorniak",
   "description": "Application to test your typing speed",
   "private": true,

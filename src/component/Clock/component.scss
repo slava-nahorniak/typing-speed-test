@@ -1,0 +1,16 @@
+.colon {
+    opacity: 0;
+}
+
+.colon__flashing {
+    animation: flashing 1s ease-out 0s infinite alternate both;
+}
+
+@keyframes flashing {
+    form {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,3 +1,3 @@
-export * from './type';
+export * from './types';
 export * from './context';
 export { default } from './context';

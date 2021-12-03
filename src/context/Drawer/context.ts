@@ -1,19 +1,20 @@
 import { ReactNode } from 'react';
-import { IDrawerContext } from './type';
+import { Props as DrawerProps } from '../../Layout/Drawer';
+import { IUseDrawer } from './types';
 
-class DrawerContextClass implements IDrawerContext {
+class UseDrawerClass implements IUseDrawer {
+    private _children: ReactNode;
+    private _title: string | null;
+    
     private _isClosable: boolean | null;
     private _isVisible:  boolean;
-    private _children: ReactNode;
-
-    private _title: string;
-
     
     constructor () {
+        this._children = null;
+        this._title = null;
+
         this._isVisible = false;
         this._isClosable = null;
-
-        this._children = null;
     }
     
     public get isVisible() {
@@ -43,14 +44,31 @@ class DrawerContextClass implements IDrawerContext {
 
     public get children() {
         return this._children;
-    }
+    };
     public set children( value: ReactNode ) {
         this._children = value;
-    }
 
-    static useDrawer( { title, children,  } ) {}
+        if ( !Boolean( value ) ) { this._isClosable = null };
+    };
+
+    public get title() {
+        return this._title;
+    };
+    public set title( value: string | null ) {
+        this._title = value;
+    };
+
+    public useDrawer( { // TODO: split onto two functions: show and hide. Investigate: Could I make setters private with that?
+        children,
+        title
+    }: Pick< DrawerProps, "children" | "title" > ) {
+        this.title = title;
+        this.children = children;
+
+        return [ this.isVisible,  ]
+    }
 }
 
-const drawerContext = new DrawerContextClass();
+const drawerService = new UseDrawerClass();
 
-export default drawerContext as IDrawerContext;
+export default drawerService as IUseDrawer;

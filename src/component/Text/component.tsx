@@ -1,8 +1,4 @@
-import React from 'react';
-
-export interface TextProps extends React.HTMLAttributes< HTMLSpanElement > {
-    text: string | number
-};
+import { Props as TextProps } from './types';
 
 const Text = ( { text, ...ownHTMLProps }: TextProps ) => {
     return (

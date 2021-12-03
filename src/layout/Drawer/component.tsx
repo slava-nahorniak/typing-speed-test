@@ -1,20 +1,14 @@
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
 import cx from 'classnames';
 import Button from '../../component/Button';
 import Header from '../../component/Header';
-
-export interface Props extends PropsWithChildren< Pick< HTMLAttributes< HTMLElement > , "className" > > {
-    title: string
-    onCloseClick: () => void
-    isClosable?: boolean
-};
+import { Props } from './types';
 
 const DrawerLayout = ( {
     children,
     title,
     className,
     onCloseClick,
-    isClosable = false
+    isClosable = true
 }: Props ) => {
     const drawerClasses = cx( className, 'drawer' );
 

@@ -1,8 +1,10 @@
-import { Digit, Props as ClockProps, TimeDimentionTens } from '.';
 import { MINUTES_IN_HOUR, SECONDS_IN_MINUTE, TENS } from '../../const';
 import { getTensFromNumber } from './helper';
+import { Digit, Props as ClockProps, TimeDimentionTens } from './types';
 
-export const fromNumberToClockValue = ( value: number ): Pick< ClockProps, "minutesTens" | "minutesUnits" | "secondsTens" | "secondsUnits" > => {
+export const fromNumberToClockValue = (
+    value: number
+): Pick< ClockProps, "minutesTens" | "minutesUnits" | "secondsTens" | "secondsUnits" > => {
     let minutes = Math.trunc( value / SECONDS_IN_MINUTE );
 
     if ( minutes > MINUTES_IN_HOUR ) {

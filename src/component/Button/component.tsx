@@ -1,14 +1,6 @@
-import React, { MouseEventHandler } from 'react';
 import Text from '../Text';
 import cx from 'classnames';
-
-export interface Props extends Pick< HTMLButtonElement , "disabled" > {
-    id: string
-    onClick: MouseEventHandler
-    title?: string
-    icon?: "close"
-    isSimple?: boolean
-};
+import { Props } from './types';
 
 const Button = ( {
     id,
@@ -24,7 +16,7 @@ const Button = ( {
         <button
             id={ id }
             onClick={ onClick }
-            className="buttonClasses"
+            className={ buttonClasses }
             disabled={ disabled }
         >
             { title && <Text

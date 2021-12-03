@@ -1,20 +1,14 @@
-import React from 'react';
-import Clock from '../../component/Clock';
 import Header from '../../component/Header';
-import DrawerLayout from '../Drawer';
+import { Props } from './types';
 
-interface Props {
-    
-}
-
-const MainLayout = ( {}: Props) => {
+const MainLayout = ( { className }: Props ) => {
     return (
         <main
-            className="app-page"
+            className={ className }
         >
             <Header
                 level={ 1 }
-                className="app-page_header"
+                className="main_header"
                 text="Your typing speed test!"
             />
             <TestLayout />

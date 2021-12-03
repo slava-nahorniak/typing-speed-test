@@ -1,17 +1,11 @@
-import React from 'react';
+import { createElement } from 'react';
 import Text from '../Text/component';
+import { Props } from './types';
 
-type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-
-export interface Props extends React.HTMLAttributes< HTMLHeadingElement > {
-    level: HeadingLevel
-    text: string
-};
-
-const Header = ( { level, text, ...ownHTMLProps }: Props ) => {
+const Header = ( { level, text, ...ownHTMLProps }: Props ) => { // TODO: concretize props in the types
     const headerId = ownHTMLProps.id;
 
-    return React.createElement(
+    return createElement(
         `h${ level }`,
         ownHTMLProps,
         ( <Text

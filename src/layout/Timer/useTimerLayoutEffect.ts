@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { HookProps, HookReturns } from './types';
 import { DEFAULT_TIMER_VALUE } from './const';
-
-type HookReturns = [ isActive: boolean, timeLeft: number ];
-type HookProps = {
-    isActivated: boolean
-    startTime?: number
-};
 
 export const useTimerLayoutEffect = ( { isActivated, startTime = DEFAULT_TIMER_VALUE }: HookProps ): HookReturns => {
     debugger;

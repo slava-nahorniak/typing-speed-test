@@ -1,13 +1,8 @@
-import React, { useState } from 'react'
-import Button from '../../component/Button';
+import { useState } from 'react'
+import { Props } from './types';
 import Clock, { fromNumberToClockValue } from '../../component/Clock';
 import Header from '../../component/Header'
-import Icon from '../../component/Icon';
 import { useTimerLayoutEffect } from './useTimerLayoutEffect';
-
-export interface Props {
-    isActivated: boolean
-}
 
 function TimerLatout( { isActivated }: Props ) {
     const startTime = useState< number | null >( null );

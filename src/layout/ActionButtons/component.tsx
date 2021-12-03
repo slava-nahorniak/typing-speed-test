@@ -1,7 +1,6 @@
-import React from 'react';
 import { Props } from './types';
 
-const Icon = ({  }: Props) => {
+const Icon = ( {  }: Props ) => {
     return (
         <span
             aria-roledescription="Some description"

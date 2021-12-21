@@ -1,4 +1,6 @@
 import Header from '../../component/Header';
+import Test from '../Test';
+import { DEFAULT_TIMER_VALUE } from '../Test/config';
 import { Props } from './types';
 
 const MainLayout = ( { className }: Props ) => {
@@ -6,12 +8,16 @@ const MainLayout = ( { className }: Props ) => {
         <main
             className={ className }
         >
-            <Header
-                level={ 1 }
-                className="main_header"
-                text="Your typing speed test!"
-            />
-            <TestLayout />
+            <section
+                className="main_content"
+            >
+                <Header
+                    level={ 1 }
+                    className="main_header"
+                    text="Test Your typing speed!"
+                />
+                <Test usedTimeAmount={ DEFAULT_TIMER_VALUE } />
+            </section>
         </main>
     )
 }

@@ -1,35 +1,51 @@
-import { useEffect, useRef, useState } from 'react';
-import { HookProps, HookReturns } from './types';
-import { DEFAULT_TIMER_VALUE } from './const';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { HookProps } from './types';
 
-export const useTimerLayoutEffect = ( { isActivated, startTime = DEFAULT_TIMER_VALUE }: HookProps ): HookReturns => {
-    debugger;
-    const [ isHandlingInterval, setIsHandlingInterval ] = useState< boolean >( isActivated );
-    const timePassedRef = useRef< number >( 0 );
+export const useTimerLayoutEffect = ( { isActivated, timeAmount, onTimer }: HookProps ): number => {
+    const [ ticks, setTicks ] = useState< number >( 0 );
+    const ticksRef = useRef< number >( ticks );
 
-    useEffect( () => {
-        if ( isActivated && !isHandlingInterval ) {
-            setIsHandlingInterval( true );
-        }
-    }, [ isActivated, isHandlingInterval ] );
+    const [ timerId, setTimerId ] = useState< ReturnType< typeof setInterval > | null >( null );
 
-    useEffect( () => {
-        startTime - timePassedRef.current === 0 && isHandlingInterval && setIsHandlingInterval( false );
-    }, [ isHandlingInterval, startTime, timePassedRef.current ] ); // TODO: investigate needness of startTime.
+    const catchOnTimer = useCallback(
+        () => {
+            if ( timerId && ( timeAmount - 1 ) - ticks === 0 ) {
+                setTimerId( null );
+                clearInterval( timerId );
 
-    useEffect( () => {
-        // TODO: I think the overall time must be verified with the implementation below. It must differ for [some value].
-        // TODO: investigate when will be the change of isActive handled.
-        const timer = isHandlingInterval && setInterval( () => {
-            timePassedRef.current += 1;
-        }, 1000 );
+                onTimer && onTimer();
 
-        return () => {
-            if ( timer ) {
-                clearInterval( timer );
+                ticksRef.current = 0;
+                setTicks( 0 );
             }
-        };
-    }, [ isHandlingInterval ] );
+        },
+        [ timerId, onTimer, timeAmount, ticks ],
+    );
 
-    return [ isHandlingInterval, timePassedRef.current ];
+    const handleTimerActivation = useMemo(
+        () => isActivated
+            ? () => {
+                if ( !timerId ) {
+                    setTimerId(
+                        setInterval( () => {
+                            debugger;
+                            console.info( performance.now() );
+                            ticksRef.current += 1;
+                            setTicks( ticksRef.current );
+                        }, 1000 )
+                    );
+                }
+            } : undefined,
+        [ isActivated, timerId ],
+    );
+
+    useEffect( () => {
+        if ( handleTimerActivation ) {
+            handleTimerActivation();
+        
+            return catchOnTimer;
+        }
+    }, [ handleTimerActivation, catchOnTimer ] );
+
+    return ticks;
 }

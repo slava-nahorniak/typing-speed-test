@@ -1,4 +1,4 @@
-import { createContext, useMemo } from 'react';
+import { createContext, useCallback } from 'react';
 import Drawer, { Props as DrawerProps } from './Layout/Drawer';
 import Main from './Layout/Main';
 import { default as drawerService } from './context/Drawer';
@@ -6,18 +6,18 @@ import { default as drawerService } from './context/Drawer';
 export const DrawerContext = createContext( drawerService );
 
 const App = () => {
-    const onCloseDrawerClick = useMemo( () => {
-        return drawerService.isClosable
-            ? () => {
-                drawerService.isVisible = false;
-            } : undefined
-    }, [ drawerService.isClosable ] );
-    const drawerProps = useMemo< DrawerProps >( () => ( {
+    const onCloseDrawerClick = useCallback( () => {
+        if ( drawerService.isClosable ) {
+            drawerService.isVisible = false;
+        };
+    }, [] );
+    
+    const drawerProps: DrawerProps = {
         className: 'app-page_drawer',
         title: drawerService.title || '',
         children: drawerService.children,
         onCloseClick: onCloseDrawerClick
-    } ), [ drawerService.title, drawerService.children, onCloseDrawerClick ] );
+    };
 
     return (
         <DrawerContext.Provider value={ drawerService } >

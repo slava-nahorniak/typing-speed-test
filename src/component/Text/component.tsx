@@ -1,6 +1,6 @@
-import { Props as TextProps } from './types';
+import { Props } from './types';
 
-const Text = ( { text, ...ownHTMLProps }: TextProps ) => {
+const Text = ( { text, ...ownHTMLProps }: Props ) => {
     return (
         <span
             { ...ownHTMLProps }

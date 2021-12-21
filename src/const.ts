@@ -52,3 +52,5 @@ export const MINUTES_IN_HOUR = TIME_DIMENTION * MINUTE;
 export const SECONDS_IN_HOUR = SECONDS_IN_MINUTE * MINUTES_IN_HOUR;
 
 export const TENS = 10;
+
+export const TEXT_TO_BE_TYPED = 'Some shufled words'; // TODO: take care about the `text`!

@@ -1,9 +1,9 @@
 .colon {
-    opacity: 0;
+    opacity: 1;
 }
 
 .colon__flashing {
-    animation: flashing 1s ease-out 0s infinite alternate both;
+    animation: flashing 0.5s ease-in-out 0s infinite alternate both;
 }
 
 @keyframes flashing {

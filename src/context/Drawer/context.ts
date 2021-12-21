@@ -18,7 +18,7 @@ class UseDrawerClass implements IUseDrawer {
     }
     
     public get isVisible() {
-        return typeof this._isClosable !== null && this._isVisible;
+        return this._isClosable !== null && this._isVisible;
     };
     public set isVisible( value ) {
         if ( value && !this._children ) {

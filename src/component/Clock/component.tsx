@@ -1,6 +1,6 @@
 import Text from '../Text';
 import cx from 'classnames';
-import styles from './component.scss';
+import './component.css';
 import { Props } from './types';
 
 const Clock = ( {
@@ -12,12 +12,12 @@ const Clock = ( {
 }: Props ) => {
     // TODO: Investigate. Do we need to wrap `cx` with useMemo?
     const colonClasses = cx({
-        [styles.colon]: true,
-        [styles.colon__flashing]: isActive
+        'colon': true,
+        'colon__flashing': isActive
     });
 
     return (
-        <section
+        <span
             aria-disabled={ isActive }
         >
             <Text
@@ -47,7 +47,7 @@ const Clock = ( {
                 id="timer_second"
                 text={ secondsUnits }
             />
-        </section>
+        </span>
     )
 }
 
